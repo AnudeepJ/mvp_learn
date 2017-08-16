@@ -4,7 +4,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 
 import net.GithubService;
 import net.dto.GithubRepo;
@@ -17,8 +16,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity {
-    private static final String TAG = MainActivity.class.getSimpleName();
+public class GithubActivity extends AppCompatActivity implements GithubView {
+    private static final String TAG = GithubActivity.class.getSimpleName();
     RecyclerView recyclerView;
     Call<List<GithubRepo>> allRepos;
 
@@ -44,8 +43,7 @@ public class MainActivity extends AppCompatActivity {
         allRepos.enqueue(new Callback<List<GithubRepo>>() {
             @Override
             public void onResponse(Call<List<GithubRepo>> call, Response<List<GithubRepo>> response) {
-                reposAdapter.setData(response.body());
-                recyclerView.setAdapter(reposAdapter);
+
 
             }
 
@@ -68,5 +66,14 @@ public class MainActivity extends AppCompatActivity {
         if (allRepos != null) {
             allRepos.cancel();
         }
+    }
+
+    @Override
+    public void setData(List<GithubRepo> data) {
+//        reposAdapter.setData(response.body());
+
+        reposAdapter.setData(data);
+
+        recyclerView.setAdapter(reposAdapter);
     }
 }

@@ -1,7 +1,5 @@
 package assignment.com.dagger2learning;
 
-import net.GithubService;
-
 import dagger.Component;
 
 /**
@@ -17,5 +15,5 @@ public interface HomeActivityComponent {
 //    GithubService githubService();
 
 
-    void injectHomeActivity (MainActivity mainActivity);
+    void injectHomeActivity (GithubActivity githubActivity);
 }
